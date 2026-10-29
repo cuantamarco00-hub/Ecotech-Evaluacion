@@ -1,0 +1,4 @@
+INFORME DE EMPLEADOS - EcoTech Solutions
+========================================
+ID: 1 | asdasd asd asdasdasdasd  asd asd asd asd asd asd | Fono: 123123123 | Correo: asdasdasdad@aaaa.cl | Contrato: 1000-01-01 | Sueldo: $9.999 | Sin departamento
+ID: 2 | a | Fono: 123123123 | Correo: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@aa.cl | Contrato: 1000-10-10 | Sueldo: $88.899 | Sin departamento
