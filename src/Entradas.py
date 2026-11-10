@@ -1,7 +1,11 @@
-def pedir_dato(mensaje, validador, leer=input):
+def pedir_dato(mensaje, validador, predeterminado=None, leer=input):
+    """Pide un dato y lo valida. Si se pulsa Enter y hay valor predeterminado, se usa ese."""
     while True:
         try:
-            return validador(leer(mensaje))
+            texto = leer(mensaje)
+            if predeterminado is not None and str(texto).strip() == "":
+                texto = predeterminado
+            return validador(texto)
         except (TypeError, ValueError) as error:
             print(f"{error} Intenta nuevamente.")
 

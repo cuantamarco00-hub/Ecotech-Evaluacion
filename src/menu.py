@@ -6,12 +6,8 @@ from dominio.empleado import Empleado
 from dominio.proyecto import Proyecto
 from dominio.registrotiempo import RegistroTiempo
 from persistencia.semilla_bd import cargar_datos_prueba
-from Servicios import (gestion_departamentos, gestion_proyectos, gestion_tiempos, gestion_empleados)
-from Servicios.permisos import exigir_sesion
-from Servicios.gestion_proyectos import listar_empleados_proyecto
-from Servicios.gestion_empleados import listar_empleados
-from Servicios.gestion_departamentos import listar_departamentos
-from Servicios.gestion_registro_tiempo import listar_registros_tiempo
+from Servicios import (gestion_departamentos, gestion_proyectos, gestion_empleados)
+from Servicios import gestion_registro_tiempo as gestion_tiempos
 
 # ---------------------------------------------------------------
 # Ayudas para pedir datos
@@ -136,7 +132,7 @@ def crear_cuenta_empleado(sesion):
         print("✗ Las contraseñas no coinciden.")
         return
     rol = Usuario.ROL_ADMIN if pedir_si_no("¿Será administrador?") else Usuario.ROL_FUNCIONARIO
-    gestion_departamentos.crear_cuenta(sesion, empleado_id, usuario, clave, rol)
+    gestion_empleados.crear_cuenta(sesion, empleado_id, usuario, clave, rol)
     print(f"✓ Cuenta '{usuario}' creada correctamente con rol {rol}.")
 
 

@@ -18,12 +18,12 @@ class Departamento:
         empleado.departamento_id = self._id
         return True
 
-    def mostrardatos(self) -> str:
+    def mostrar_datos(self) -> str:
         return (f"ID: {self._id} | {self.nombre} | "
                 f"Gerente: {self.gerente_id or '-'} | Ubicación: {self.ubicacion or '-'}")
 
     def __str__(self) -> str:
-        return self.mostrardatos()
+        return self.mostrar_datos()
 
     @property
     def empleados(self) -> tuple:

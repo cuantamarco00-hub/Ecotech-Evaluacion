@@ -1,4 +1,8 @@
+import math
 import time
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+
 import requests
 
 URL = "https://open.er-api.com/v6/latest/USD"
@@ -26,10 +30,25 @@ def extraer_tasa(datos, moneda="CLP"):
 
     valor = datos.get("rates", {}).get(moneda)
 
-    if not isinstance(valor, (int, float)) or valor <= 0:
+    if (not isinstance(valor, (int, float)) or isinstance(valor, bool)
+            or not math.isfinite(valor) or valor <= 0):
         raise ValueError(f"Valor de {moneda} inválido o no disponible.")
 
     return valor
+
+
+def extraer_primero(datos, moneda=MONEDA):
+    """Devuelve (fecha 'AAAA-MM-DD', valor) validados a partir del JSON de la API."""
+    valor = extraer_tasa(datos, moneda)  # valida resultado exitoso y valor positivo
+    marca = datos.get("time_last_update_unix")
+    try:
+        if isinstance(marca, (int, float)) and not isinstance(marca, bool):
+            fecha = datetime.fromtimestamp(marca, tz=timezone.utc).date()
+        else:
+            fecha = parsedate_to_datetime(datos.get("time_last_update_utc")).date()
+    except (TypeError, ValueError, OverflowError, OSError):
+        raise ValueError("La API no entregó una fecha válida.")
+    return fecha.isoformat(), float(valor)
 
 
 def mostrar_resultado(moneda, tasa, fecha):

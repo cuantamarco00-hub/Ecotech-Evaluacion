@@ -40,8 +40,8 @@ PROYECTOS = [
 ]
 
 CUENTAS = [
-    ("admin", "ADMIN_PASSWORD", "admin123", "Administrador", "ana@ecotech.example"),
-    ("funcionario", "FUNCIONARIO_PASSWORD", "funcionario123", "Funcionario", "juan@ecotech.example"),
+    ("admin", "ADMIN_PASSWORD", "admin1234", "Administrador", "ana@ecotech.example"),
+    ("funcionario", "FUNCIONARIO_PASSWORD", "funcionario1234", "Funcionario", "juan@ecotech.example"),
 ]
 
 def cargar_departamentos():
