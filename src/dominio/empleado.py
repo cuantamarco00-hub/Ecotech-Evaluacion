@@ -88,12 +88,6 @@ class Empleado:
                 f"Correo: {self._correo} | Contrato: {self._fecha_contrato.isoformat()} | "
                 f"Sueldo: ${sueldo} | {depto}")
 
-    def registrar_tiempo(self, fecha, horas):
-        """Crea un RegistroTiempo, lo guarda en el empleado y devuelve un texto."""
-        registro = RegistroTiempo(fecha, horas)
-        self._registros.append(registro)
-        return registro.registrar_tiempo()
-
     @property
     def registros(self):
         return tuple(self._registros)

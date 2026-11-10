@@ -1,13 +1,12 @@
 from dominio.empleado import Empleado
-from dominio.validaciones import validar_texto, validar_texto_opcional
-
+from dominio.validaciones import validar_texto, validar_texto_opcional, validar_id
 
 class Departamento:
 
-    def __init__(self, nombre: str, gerente: str = None, ubicacion: str = None, id: int = None):
+    def __init__(self, nombre: str, gerente_id: int = None, ubicacion: str = None, id: int = None):
         self._id = id
         self.nombre = nombre
-        self.gerente = gerente
+        self.gerente_id = gerente_id
         self.ubicacion = ubicacion
         self._empleados: list[Empleado] = []
 
@@ -21,7 +20,7 @@ class Departamento:
 
     def mostrardatos(self) -> str:
         return (f"ID: {self._id} | {self.nombre} | "
-                f"Gerente: {self.gerente or '-'} | Ubicación: {self.ubicacion or '-'}")
+                f"Gerente: {self.gerente_id or '-'} | Ubicación: {self.ubicacion or '-'}")
 
     def __str__(self) -> str:
         return self.mostrardatos()
@@ -50,12 +49,12 @@ class Departamento:
         self._nombre = validar_texto(valor, "El nombre del departamento", 100)
 
     @property
-    def gerente(self):
-        return self._gerente
+    def gerente_id(self):
+        return self._gerente_id
 
-    @gerente.setter
-    def gerente(self, valor):
-        self._gerente = validar_texto_opcional(valor, "El gerente", 100)
+    @gerente_id.setter
+    def gerente_id(self, valor):
+        self._gerente_id = None if valor is None else validar_id(valor)
 
     @property
     def ubicacion(self):

@@ -4,7 +4,8 @@ from dominio.validaciones import validar_texto, validar_texto_opcional, validar_
 class Proyecto:
     """Clase Proyecto del UML. Un proyecto tiene varios empleados (y un empleado, varios proyectos)."""
 
-    def __init__(self, nombre, descripcion=None, fecha_inicio=None, fecha_fin=None):
+    def __init__(self, nombre, descripcion=None, fecha_inicio=None, fecha_fin=None, id=None):
+        self.id = id
         self.nombre = nombre
         self.descripcion = descripcion
         self.fecha_inicio = fecha_inicio
@@ -66,3 +67,9 @@ class Proyecto:
             return False
         self._empleados.remove(empleado)
         return True
+
+    def mostrar_datos(self):
+        inicio = self._fecha_inicio.isoformat() if self._fecha_inicio else "-"
+        fin = self._fecha_fin.isoformat() if self._fecha_fin else "-"
+        return (f"ID: {self.id} | {self._nombre} | Inicio: {inicio} | Fin: {fin} | "
+                f"{self._descripcion or 'Sin descripción'}")

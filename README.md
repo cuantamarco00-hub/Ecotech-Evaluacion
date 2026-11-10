@@ -1,0 +1,3 @@
+Evaluacion n°2: Conectividad y Acceso Seguro en EcoTech Solutions
+
+La empresa EcoTech Solutions busca validar la factibilidad de su nueva extencion en su sistema, por ello, antes de empezar el desarrollo completo del sistema, realizan una prueba donde se compruebe si es posible obtener datos del clima y el valor de monedas, esto se hara con fuentes extrernas, asegurando que solo usuarios autorizados puedan de visualizar y ejecutar las nuevas funcionalidades, mediante un sistema seguro

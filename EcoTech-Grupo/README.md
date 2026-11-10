@@ -1,1 +1,0 @@
-# EcoTech-Grupo

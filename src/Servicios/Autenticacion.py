@@ -1,7 +1,11 @@
 import bcrypt
 from dominio.Usuario import Usuario
+from persistencia.empleado_dao import EmpleadoDAO
+from persistencia.usuario_dao import UsuarioDAO
 
 MAX_BYTES_BCRYPT = 72
+
+
 def crear_hash(clave):
     clave = Usuario.validar_clave(clave)
     clave_bytes = clave.encode("utf-8")
@@ -11,13 +15,13 @@ def crear_hash(clave):
     clave_bytes, bcrypt.gensalt()
     ).decode("utf-8")
 
-def registrar_usuario(empleado_id, nombre, clave):
+def registrar_usuario(empleado_id, nombre, clave, rol="Funcionario"):
     nombre = Usuario.normalizar_usuario(nombre)
-    if Usuario.buscar_por_nombre(nombre) is not None:
+    if UsuarioDAO.buscar_por_nombre(nombre) is not None:
         raise ValueError("No se pudo crear esa cuenta.")
     hash_guardado = crear_hash(clave)
-    usuario = Usuario(nombre, hash_guardado, empleado_id)
-    return Usuario.insertar(usuario)
+    usuario = Usuario(nombre, hash_guardado, empleado_id, rol=rol)
+    return UsuarioDAO.insertar(usuario).id
 
 def autenticar(nombre, clave):
     nombre = Usuario.normalizar_usuario(nombre)
@@ -26,7 +30,7 @@ def autenticar(nombre, clave):
     datos = clave.encode("utf-8")
     if not 0 < len(datos) <= MAX_BYTES_BCRYPT:
         return None
-    cuenta = Usuario.buscar_por_nombre(nombre)
+    cuenta = UsuarioDAO.buscar_por_nombre(nombre)
 
     if cuenta is None:
         print(f"No se encontró la cuenta para el usuario: {nombre}")
@@ -34,4 +38,4 @@ def autenticar(nombre, clave):
     if not bcrypt.checkpw(datos, cuenta.password_hash.encode("utf-8")):
         return None
     return {"id": cuenta.id, "empleado_id": cuenta.empleado_id,
-"nombre_usuario": cuenta.nombre_usuario}
+    "nombre_usuario": cuenta.nombre_usuario, "rol": cuenta.rol}
