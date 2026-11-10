@@ -1,4 +1,4 @@
-EcoTech Solutions – Evaluación N°3 (TI3021)
+EcoTech Solutions – Evaluación N°3 
 
 Sistema de consola en Python para EcoTech Solutions: gestión de empleados, departamentos,
 proyectos y horas, con **inicio de sesión por roles** y consulta de **tipo de cambio desde una API externa**
